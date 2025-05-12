@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadata and character set configuration -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <!-- Link to custom stylesheet and external icon library -->
+    <link rel="stylesheet" type="text/css" href='/static/admin_style.css'>
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Title for the page -->
+    <title>{% block title %}Jobs{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Sidebar with navigation links -->
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-heading">
+            <h1>Tutor Gate</h1>
+        </div>
+
+        <!-- Sidebar menu items -->
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="/student/dashboard" {% if request.path == '/student/dashboard' %}class="active"{% endif %} >
+                        <img src="https://img.icons8.com/external-flaticons-lineal-flat-icons/64/external-dashboard-computer-programming-flaticons-lineal-flat-icons.png"
+                            alt="Dashboard Icon" />
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/jobs" class="active">
+                        <img src="https://img.icons8.com/ios/50/resume-website.png"
+                            alt="Maintenece team icon" />
+                        <span>Avaliable Jobs</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/applications" {% if request.path == '/applications' %}class="active"{% endif %}>
+                        <img src="https://img.icons8.com/external-sbts2018-outline-sbts2018/58/external-jobs-social-media-basic-1-sbts2018-outline-sbts2018.png" alt="external-jobs-social-media-basic-1-sbts2018-outline-sbts2018"
+                            alt="Maintance query icon" />
+                        <span>Applications</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/profile" {% if request.path == '/profile' %}class="active"{% endif %} >
+                        <img src="https://img.icons8.com/glyph-neue/64/group--v1.png" alt="group--v1" />
+                        <span>Profile</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/schedule" {% if request.path == '/schedule' %}class="active"{% endif %} >
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/time-and-date/daily-schedule-icon.png" alt="group--v1" />
+                        <span>Schedule</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main content section -->
+    <div class="main-content">
+        <!-- Header section with navigation toggle, search bar, and user information -->
+        <header>
+            <h1>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                Jobs
+            </h1>
+
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <form action="/search" method="GET"> <!-- Added form element -->
+                    <input type="search" name="q" placeholder="search here" /> <!-- Added name attribute for query parameter -->
+                    <button type="submit" style="border: none; background: none; cursor: pointer;">
+                        <img src="{{ url_for('static', filename='search.png') }}" alt="Search" width="20" height="20">
+                    </button>
+                </form>
+            </div>            
+
+            <div class="user-wrapper">
+                <a href="/profile">
+                <img src="https://img.icons8.com/ios-filled/50/admin-settings-male.png" alt="admin-settings-male" />
+                </a>
+                <div>
+                    <h4>
+                        {{ current_user.email}}
+                    </h4>
+                    <a href="/logout">Sign Out</a>
+                    
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area with dashboard information -->
+        <main>{% block main %}
+            <div class="container">
+                {% for job in jobs %}
+                    <div class="wrapper">
+                        <h2 style="color:rgb(19, 18, 18);">{{job.name}}</h2>
+                        {% for course in courses %}
+                            {% if course.id == job.courseId %}
+                                <h3 style="color:rgb(19, 18, 18); display: inline-block;">Course     : </h3> <p style="color:rgb(19, 18, 18); display: inline-block; margin-left: 5px;">{{course.courseName}}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        <h3 style="color:rgb(19, 18, 18); display: inline-block;">Location   : </h3> <p style="color:rgb(19, 18, 18); display: inline-block; margin-left: 5px;">{{job.location}}</p>
+                        <br>
+                        <h3 style="color:rgb(19, 18, 18); display: inline-block;">Closing date  : </h3> <p style="color:rgb(19, 18, 18); display: inline-block; margin-left: 5px;">{{job.closing_date}}</p>
+                        <br>
+                        <button type="submit" class="btn" onclick="applyForJob('{{ job.id }}')">apply</button>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+            {% endblock %}
+        </main>
+
+
+
+<script>
+    function closePopup() {
+        console.log('Closing popup');
+        var popup = document.querySelector('.popup');
+        popup.classList.remove('open-popup');
+    }
+    
+</script>
+
+<script>
+    function applyForJob(jobId) {
+        // You can perform any necessary logic here before submitting the application
+        // For example, you can redirect the user to the application page with the jobId as a parameter
+        window.location.href = "/application?job_id=" + jobId;
+    }
+</script>
+
+</div>
+</body>
+
+</html>

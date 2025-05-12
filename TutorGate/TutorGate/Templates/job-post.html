@@ -1,0 +1,81 @@
+<!--job-post.html-->
+
+{% extends "faculty_dashboard.html" %}
+
+{% block title %}
+    Job Post
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-section">
+    <div class="Maintenance-section">
+        <div class="section-content">
+            <div class="section-header">
+                <h3>Job Post Info</h3>
+                <!-- Button to trigger the popup form -->
+                <button onclick="openPopup()">Post Job<span class="las la-arrow-right"></span></button>
+
+                <!-- Popup form -->
+                <div id="popup" class="overlay-background">
+                    <div class="popup-form">
+                        <h2>Add Job</h2>
+                        <form action="/job_post" method="post">
+                            <label for="foreman">Job name:</label>
+                            <input type="text" id="jobTitle" name="jobTitle">
+                            <label for="text">Job location</label>
+                            <input type="text" name="location" id="location">
+                            <label for="number">Closing Date:</label>
+                            <input type="date"  name='date' id="date">
+    
+                            <label for="course">Course:</label>
+                            <select id="course" name="course">
+                                <option value="Introduction to Psychology">Introduction to Psychology</option>
+                                <option value="Principles of Microeconomics">Principles of Microeconomics</option>
+                                <option value="Organic Chemistry I">Organic Chemistry I</option>
+                                <option value="World History: Ancient Civilizations">World History: Ancient Civilizations</option>
+                                <option value="Introduction to Computer Science">Introduction to Computer Science</option>
+                                <option value="Introduction to Sociology">Introduction to Sociology</option>
+                                <option value="Principles of Marketing">Principles of Marketing</option>
+                                <option value="Environmental Science and Sustainability">Environmental Science and Sustainability</option>
+                                <option value="Introduction to Political Science">Introduction to Political Science</option>
+                                <option value="Introduction to Literature: Fiction">Introduction to Literature: Fiction</option>
+                            </select>
+    
+                            <div class="buttons">
+                                <button type="submit">Submit</button>
+                                <button onclick="closePopup(event)">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+  
+                    <script>
+                        // Function to open the popup
+                        function openPopup() {
+                            document.getElementById('popup').style.display = 'flex';
+                        }
+        
+                        // Function to close the popup
+                        function closePopup(event) {
+                            event.preventDefault();
+                            document.getElementById('popup').style.display = 'none';
+                        }
+                        
+                    </script>
+            </div>
+            
+            <div class="table-responsive">
+                <table width="100%">
+                    <!-- Table header with column names -->
+                    <thead>
+                            
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
