@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application - Tutor Gate</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        .column {
+            float: left;
+            width: 50%;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="" id="applicationForm" method="POST" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            <h1>Application</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {%for category, message in messages%}
+                        <div class="alert alert-{{category}}">
+                            <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    {%endfor %}
+                {% endif %}
+            {% endwith %}
+                    <div class="input-box">
+                        <label> Are you legally authorised to work in South Africa?</label>
+                        {{ form.authorised }}
+                    </div>
+
+                    <div class="input-box">
+                        <label>Do you have any experience relevant to this job?</label>
+                        {{ form.experience }}
+                    </div>
+
+                    <div class="input-box">
+                        <label>Highest level of education completed</label>
+                        {{ form.educationlvl }}
+                    </div>
+                    <div class="input-box">
+                        <label>Current year of study</label>
+                        {{ form.year }}
+                    </div>
+                    <div class="input-box">
+                        <label>Preferred working days:</label>
+                        {{ form.preferred_days }}
+                    </div>
+                    <div class="input-box">
+                        <label for="preferred_time">Preferred working time:</label>
+                        {{ form.preferred_time }}
+                    </div>
+                    <div class="input-box">
+                        <label for="cv">Upload Resume/CV:</label>
+                        {{ form.cv }}
+                    </div>
+                    <div class="input-box">
+                        <label for="supporting_doc">Upload supporting document(s):</label>
+                        {{ form.supporting_doc }}
+                    </div>
+            <div class="input-box">
+                <label>What makes you the best candidate for this position</label>
+                <input type="text" id="more_info" name="more_info" placeholder="Traits, Past Work Experience, Skills, What You Hope To Learn" required></input>
+            </div>
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

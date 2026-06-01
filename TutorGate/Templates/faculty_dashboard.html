@@ -1,0 +1,303 @@
+<!--admin-base.html-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Metadata and character set configuration -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+    <!-- Link to custom stylesheet and external icon library -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admin_style.css') }}">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Title for the page -->
+    <title>{% block title %}Faculty Dashboard{% endblock %}</title>
+</head>
+
+<body>
+    <!-- Sidebar with navigation links -->
+    <input type="checkbox" id="nav-toggle">
+    <div class="sidebar">
+        <div class="sidebar-heading">
+            <h1>Faculty Dashboard</h1>
+        </div>
+
+        <!-- Sidebar menu items -->
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="/faculty/dashboard" {% if request.path == '/faculty/dashboard' %}class="active"{% endif %} >
+                        <img src="https://img.icons8.com/external-flaticons-lineal-flat-icons/64/external-dashboard-computer-programming-flaticons-lineal-flat-icons.png"
+                            alt="Dashboard Icon" />
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/faculty/applications" {% if request.path == '/faculty/applications' %}class="active"{% endif %}>
+                        <img src="https://img.icons8.com/ios/50/resume-website.png"
+                            alt="Maintenece team icon" />
+                        <span>Job Applications</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/job_post" {% if request.path == '/job_post' %}class="active"{% endif %}>
+                        <img src="https://img.icons8.com/external-sbts2018-outline-sbts2018/58/external-jobs-social-media-basic-1-sbts2018-outline-sbts2018.png" alt="external-jobs-social-media-basic-1-sbts2018-outline-sbts2018"
+                            alt="Maintance query icon" />
+                        <span>Job Posts</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/users" {% if request.path == '/users' %}class="active"{% endif %} >
+                        <img src="https://img.icons8.com/glyph-neue/64/group--v1.png" alt="group--v1" />
+                        <span>Users</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main content section -->
+    <div class="main-content">
+        <!-- Header section with navigation toggle, search bar, and user information -->
+        <header>
+            <h1>
+                <label for="nav-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                Dashboard
+            </h1>
+
+            <div class="search-wrapper">
+                <span class="las la-search"></span>
+                <input type="search" placeholder="search here" />
+            </div>
+
+            <div class="user-wrapper">
+                <img src="https://img.icons8.com/ios-filled/50/admin-settings-male.png" alt="admin-settings-male" />
+                <div>
+                    <h4>Letho</h4>
+                    <small>Faculty Manager</small>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area with dashboard information -->
+        <main>
+            {% block content %}
+            <!-- Dashboard information cards -->
+            <div class="dashboard-info">
+                <div class="single-card-info">
+                    <div>
+                        <h1>0</h1>
+                        <span>New Applications</span>
+                    </div>
+                    <div>
+                        <img width="50" height="50" src="https://img.icons8.com/ios/50/new--v1.png" alt="new--v1" />
+                    </div>
+                </div>
+
+                <div class="single-card-info">
+                    <div>
+                        <h1>0</h1>
+                        <span>Job Posts</span>
+                    </div>
+                    <div>
+                        <img width="30" height="30" src="https://img.icons8.com/external-sbts2018-blue-sbts2018/58/external-jobs-social-media-basic-1-sbts2018-blue-sbts2018.png"
+                            alt="task-completed" />
+                    </div>
+                </div>
+
+                <div class="single-card-info">
+                    <div>
+                        <h1>0</h1>
+                        <span>Users</span>
+                    </div>
+                    <div>
+                        <img width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/group.png" alt="group" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard sections for queries in progress and new queries -->
+            <div class="dashboard-section">
+                <!-- Section for queries in progress -->
+                <div class="in-progress-section">
+                    <!-- Section header with a button to see all queries in progress -->
+                    <div class="section-content">
+                        <div class="section-header">
+                            <h3>Job Posts</h3>
+                            
+                        </div>
+
+                        <!-- Section body containing a table of queries in progress -->
+                        <div class="section-body">
+                            <div class="table-responsive">
+                                <table width="100%">
+                                    <!-- Table header with column names -->
+                                    <thead>
+                                        <tr>
+                                            <th>Job Title</th>
+                                            <th>Job Description</th>
+                                            <th>Job Department</th>
+                                            <th>Closing Date</th>
+                                        </tr>
+                                    </thead>
+                                    <!-- Table body with query information -->
+                                    <tbody>
+                                        <tr>
+                                            <td>Stats Tutor</td>
+                                            <td>Masters Student to tutor advanced Diploma students</td>
+                                            <td>Accounting and Informatics</td>
+                                            <td>3 March</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section for new queries -->
+                <div class="new-queries-section">
+                    <!-- Section header with a button to see all new queries -->
+                    <div class="section-content">
+                        <div class="section-header">
+                            <h3>New Job Applications</h3>
+ 
+                        </div>
+
+                        <!-- Section body containing new query information -->
+                        <div class="section-body">
+
+                             <div class="new-query" onclick="showDropdown()">
+                                <a href="https://polite-puffpuff-186f2a.netlify.app/static/media/resume.31ebb0ddd3dd43c1b71d.pdf" target="_blank">
+                                    <button>
+                                        <img width="25" height="25" src="https://img.icons8.com/ios/50/pdf--v2.png" alt="PDF Icon"> View CV
+                                    </button>
+                                </a>
+                                
+                                
+                                <h4>Siphumelele Dlamini</h4>
+                                <small>Stats Tutor</small><br>
+                                <small>067 327 9820</small><br>
+                                <small>email@email.com</small>
+                             </div>
+
+                             <form>
+                                <div class="overlay" id="overlay" onclick="hideDropdown(event)">
+                                    <div id="myDropdown" class="dropdown">
+                                        <label for="Applications">Select Action</label>
+                                        <select id="Applications" onchange="toggleInput()">
+                                            <option value="action">Select Action</option>
+                                            <option value="reject">Reject Application</option>
+                                            <option value="accept">Schedule an interview</option>
+                                        </select>
+                                        <!-- Input field for rejecting application -->
+                                        <div id="rejectReason" style="display: none;">
+                                            <label for="rejectReason">Reason for Rejection</label>
+                                            <input type="text" id="rejectReason">
+                                        </div>
+                                        <div id="interviewDateTime" style="display: none;">
+                                            <label for="interviewDate">Interview Date</label>
+                                            <input type="date" id="interviewDate">
+                                            <label for="interviewTime">Interview Time</label>
+                                            <input type="time" id="interviewTime">
+                                        </div>
+                                    
+                                        <button onclick="cancel()">Cancel</button>
+                                        <button onclick="ok()">OK</button>
+                                    </div>
+                                </div>
+
+                             </form>
+
+
+                            
+                            <script>
+                                function toggleInput() {
+                                    var selectedOption = document.getElementById("Applications").value;
+                                    var rejectInput = document.getElementById("rejectReason");
+                                    var interviewInput = document.getElementById("interviewDateTime");
+                                
+                                    if (selectedOption === "reject") {
+                                        rejectInput.style.display = "block";
+                                        interviewInput.style.display = "none";
+                                    } else if (selectedOption === "accept") {
+                                        rejectInput.style.display = "none";
+                                        interviewInput.style.display = "block";
+                                    }
+                                }
+                                
+                                function showDropdown() {
+                                    var overlay = document.getElementById("overlay");
+                                    var dropdown = document.getElementById("myDropdown");
+                                
+                                    // Center the dropdown
+                                    var top = window.innerHeight / 2 - dropdown.offsetHeight / 2;
+                                    var left = window.innerWidth / 2 - dropdown.offsetWidth / 2;
+                                
+                                    dropdown.style.top = top + "px";
+                                    dropdown.style.left = left + "px";
+                                
+                                    // Show the overlay and dropdown
+                                    overlay.style.display = "flex";
+                                    dropdown.style.display = "block";
+                                }
+                                
+                                function hideDropdown(event) {
+                                    var overlay = document.getElementById("overlay");
+                                    var dropdown = document.getElementById("myDropdown");
+                                
+                                    // Check if the event target is not the cancel button
+                                    if (event.target.tagName !== 'BUTTON' || event.target.innerText !== 'Cancel') {
+                                        return;
+                                    }
+                                
+                                    // Hide the overlay and dropdown
+                                    overlay.style.display = "none";
+                                    dropdown.style.display = "none";
+                                }
+                                
+                                function cancel() {
+                                    hideDropdown();
+                                }
+                                
+                                function ok() {
+                                    
+                                    hideDropdown();
+                                }
+                                
+                            
+                        </script>
+                            
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+        </main>
+
+
+
+<script>
+    function closePopup() {
+        console.log('Closing popup');
+        var popup = document.querySelector('.popup');
+        popup.classList.remove('open-popup');
+    }
+    
+</script>
+
+</div>
+</body>
+
+</html>
